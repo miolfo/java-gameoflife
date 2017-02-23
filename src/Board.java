@@ -10,12 +10,12 @@ public class Board {
         board = new boolean[this.dimensions][this.dimensions];
     }
 
-    public int GetDimensions(){
+    public int getDimensions(){
         return dimensions;
     }
 
     //Get the value at position x,y
-    public boolean At(int x, int y){
+    public boolean at(int x, int y){
         if(x >= dimensions || y >= dimensions || x < 0 || y < 0){
             System.out.println("Illegal arguments with " + x + "," + y);
             throw new IllegalArgumentException();
@@ -24,7 +24,7 @@ public class Board {
     }
 
     //Set the value at position x,y to status
-    public void At(int x, int y, boolean status){
+    public void at(int x, int y, boolean status){
         if(x >= dimensions || y >= dimensions || x < 0 || y < 0){
             throw new IllegalArgumentException();
         }
@@ -32,7 +32,7 @@ public class Board {
     }
 
     //Print the board in a readable manner
-    public void PrettyPrint(){
+    public void prettyPrint(){
         for(int i = 0; i < dimensions; i++){
             System.out.println();
             for(int j = 0; j < dimensions; j++){

@@ -18,7 +18,7 @@ public class Game {
         Random r = new Random();
         for(int i = 0; i < dimensions; i++){
             for(int j = 0; j < dimensions; j++){
-                board.At(i,j, r.nextBoolean());
+                board.at(i,j, r.nextBoolean());
             }
         }
     }
@@ -28,15 +28,15 @@ public class Game {
         this.board = board;
     }
 
-    public void Play(int iterations, boolean showAllStages){
+    public void play(int iterations, boolean showAllStages){
         //Print the initial board
-        board.PrettyPrint();
+        board.prettyPrint();
         int runIterations = 0;
         while(runIterations < iterations){
             singleIteration();
 
             if(showAllStages){
-                board.PrettyPrint();
+                board.prettyPrint();
                 //Show iterations each 500ms
                 try {
                     Thread.sleep(500);
@@ -49,19 +49,19 @@ public class Game {
             runIterations++;
         }
         //Print the finished board
-        board.PrettyPrint();
+        board.prettyPrint();
     }
 
-    //Play through a single iteration of the game of life
+    //play through a single iteration of the game of life
     private void singleIteration(){
         //Create a new board in which the updated values are set
         //to avoid prematurely updating cells
-        Board newBoard = new Board(board.GetDimensions());
+        Board newBoard = new Board(board.getDimensions());
 
         //Go through each cell and check all the rules, and set the new value to the cell
-        for(int i = 0; i < newBoard.GetDimensions(); i++){
-            for(int j = 0; j < newBoard.GetDimensions(); j++){
-                newBoard.At(i, j, checkCell(i, j));
+        for(int i = 0; i < newBoard.getDimensions(); i++){
+            for(int j = 0; j < newBoard.getDimensions(); j++){
+                newBoard.at(i, j, checkCell(i, j));
             }
         }
 
@@ -75,9 +75,9 @@ public class Game {
 
         //Check the rules in which case a cell lives
         //1) Any live cell with two or three live neighbours lives on to the next generation.
-        if(board.At(x,y) &&  (livingCellCount == 2 || livingCellCount == 3)) return true;
+        if(board.at(x,y) &&  (livingCellCount == 2 || livingCellCount == 3)) return true;
         //2) Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
-        else if(!board.At(x,y) && livingCellCount == 3) return true;
+        else if(!board.at(x,y) && livingCellCount == 3) return true;
         //Otherwise the cell is dead
         else return false;
     }
@@ -89,9 +89,9 @@ public class Game {
         for(int i = x-1; i <= x+1; i++){
             for(int j = y-1; j <= y+1; j++){
                 //Check that the x,y is not over the limits
-                if(i >= 0 && j >= 0 && i < board.GetDimensions() && j < board.GetDimensions()){
+                if(i >= 0 && j >= 0 && i < board.getDimensions() && j < board.getDimensions()){
                     //If the cell is alive (and not the current cell), increment counter
-                    if(board.At(i,j) && !(x == i && y == j)) {
+                    if(board.at(i,j) && !(x == i && y == j)) {
                         livingCells++;
                     }
                 }
